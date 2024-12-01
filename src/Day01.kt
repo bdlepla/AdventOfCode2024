@@ -24,11 +24,6 @@ fun main() {
         return ret
     }
 
-    // Test if implementation meets criteria from the description, like:
-    //check(part1(listOf("test_input")) == 1)
-
-    // Or read a large test input from the `src/Day01_test.txt` file:
-    //val testInput = readInput("Day01_test")
     val testInput = """
         3   4
         4   3
