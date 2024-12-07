@@ -3,6 +3,20 @@ import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readText
 
+typealias Coord = Pair<Int, Int>  // Row (Y), Col (X)
+typealias Grid = List<String>
+
+enum class Direction {
+    North,
+    NorthEast,
+    East,
+    SouthEast,
+    South,
+    SouthWest,
+    West,
+    NorthWest
+}
+
 /**
  * Reads lines from the given input txt file.
  */

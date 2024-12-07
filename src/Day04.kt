@@ -1,17 +1,5 @@
 
-typealias Coord = Pair<Int, Int>  // Row (Y), Col (X)
-typealias Grid = List<String>
 
-enum class Direction {
-    North,
-    NorthEast,
-    East,
-    SouthEast,
-    South,
-    SouthWest,
-    West,
-    NorthWest
-}
 
 fun main() {
 
