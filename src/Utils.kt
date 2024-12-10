@@ -38,3 +38,8 @@ fun Any?.println() = println(this)
  * Returns true if all elements in the collection match.
  */
 fun <T>Iterable<T>.unanimous(): Boolean = this.all{it == this.first()}
+
+fun <T>List<T>.allTuples():List<Pair<T, T>> =
+    this.dropLast(1).flatMapIndexed{ idx, e ->
+        this.drop(idx+1).map { e2 -> e to e2 }
+    }

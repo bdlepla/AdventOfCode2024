@@ -15,11 +15,6 @@ fun main() {
         return rules to pages
     }
 
-    fun List<Int>.allTuples():List<Pair<Int, Int>> =
-        this.dropLast(1).flatMapIndexed{ idx, e ->
-            this.drop(idx+1).map { e2 -> e to e2 }
-        }
-
     fun List<Int>.isValid(rules:List<Pair<Int, Int>>) = this.allTuples().all{ it in rules }
 
     fun List<Int>.isNotValid(rules:List<Pair<Int, Int>>) = !this.isValid(rules)
