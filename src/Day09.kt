@@ -16,7 +16,7 @@ fun main() {
         }
     }
 
-    fun part1(input:Grid):Long {
+    fun part1(input:List<String>):Long {
         val data = parse(input[0]).toMutableList()
         var startingIdx = data.indexOfFirst { it == -1L }
         var endingIdx = data.count()-1
@@ -47,7 +47,7 @@ fun main() {
 
 
 
-    fun part2(input:Grid):Long {
+    fun part2(input:List<String>):Long {
         val data  = parse(input[0]).groupToMultiBlock().toMutableList()
         var endIdx = data.count()-1
         while (endIdx > 0) {
