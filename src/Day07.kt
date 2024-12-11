@@ -44,12 +44,41 @@ fun main() {
         return (0..<3.raisedToPower(numberOfTests))
             .any{testValue == operands.calculate2(it)}
 
-}
+    }
 
-    fun part1(input:Grid):Long = input.parse().filter{it.canBeSolved()}.sumOf{it.first}
+    // found a method of solving this by going right to left with the numbers
+    // and using the inversion of the desired operation
+    // It is much faster than what I was doing above with calculate(2)
+    fun isSolvable(target:Long, numbers:List<Long>, useConcat:Boolean=false):Boolean {
+        if (numbers.count() == 1) return target == numbers[0]
+        val lastNum = numbers.last()
+        val theRest = numbers.dropLast(1)
+
+        if (target % lastNum == 0L && isSolvable(target/lastNum, theRest, useConcat))
+            return true
+
+        if (target > lastNum && isSolvable(target - lastNum, theRest, useConcat))
+            return true
+
+        if (useConcat) {
+            val targetString = target.toString()
+            val lastNumString = lastNum.toString()
+            if (targetString.endsWith(lastNumString)) {
+                val newTargetString = targetString.dropLast(lastNumString.count())
+                if (newTargetString.isEmpty()) return true
+                if (isSolvable(newTargetString.toLong(), theRest, useConcat))
+                    return true
+            }
+        }
+        return false
+    }
+
+    fun part1(input:Grid):Long = input.parse()
+        .filter{(t, n) -> isSolvable(t,n)}
+        .sumOf{it.first}
 
     fun part2(input:Grid):Long = input.parse()
-        .filter{it.canBeSolvedWithConcat()}
+        .filter{(t, n) -> isSolvable(t, n, true)}
         .sumOf{it.first}
 
     val testInput = """
