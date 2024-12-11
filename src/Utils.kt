@@ -6,6 +6,7 @@ import kotlin.io.path.readText
 typealias Coord = Pair<Int, Int>  // Row (Y), Col (X)
 typealias Grid = List<String>
 
+
 enum class Direction {
     North,
     NorthEast,
@@ -43,3 +44,7 @@ fun <T>List<T>.allTuples():List<Pair<T, T>> =
     this.dropLast(1).flatMapIndexed{ idx, e ->
         this.drop(idx+1).map { e2 -> e to e2 }
     }
+
+fun Grid.get(coord:Coord) = this[coord.first][coord.second]
+fun Grid.isValid(coord:Coord) = coord.first in 0..<this.count() &&
+        coord.second in 0..<this[0].count()
