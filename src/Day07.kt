@@ -1,3 +1,4 @@
+import kotlin.time.measureTimedValue
 
 fun main() {
     fun List<String>.parse():List<Pair<Long, List<Long>>> =
@@ -75,11 +76,29 @@ fun main() {
 
     fun part1(input:Grid):Long = input.parse()
         .filter{(t, n) -> isSolvable(t,n)}
+        //.filter{it.canBeSolved()}
         .sumOf{it.first}
 
     fun part2(input:Grid):Long = input.parse()
         .filter{(t, n) -> isSolvable(t, n, true)}
+        //.filter{it.canBeSolvedWithConcat()}
         .sumOf{it.first}
+
+    fun timePart1(input:List<String>):Long {
+        val (ret, time) = measureTimedValue {
+            part1(input)
+        }
+        check(time.inWholeMilliseconds < 1000L)
+        return ret
+    }
+
+    fun timePart2(input:List<String>):Long {
+        val (ret, time) = measureTimedValue {
+            part2(input)
+        }
+        check(time.inWholeMilliseconds < 1000L)
+        return ret
+    }
 
     val testInput = """
         190: 10 19
@@ -92,11 +111,11 @@ fun main() {
         21037: 9 7 18 13
         292: 11 6 16 20
     """.trimIndent().lines()
-    check(part1(testInput) == 3749L)
-    check(part2(testInput) == 11387L)
+    check(timePart1(testInput) == 3749L)
+    check(timePart2(testInput) == 11387L)
 
     // Read the input from the `src/Day07.txt` file.
     val input = readInput("Day07")
-    part1(input).println()
-    part2(input).println()
+    timePart1(input).println()
+    timePart2(input).println()
 }
