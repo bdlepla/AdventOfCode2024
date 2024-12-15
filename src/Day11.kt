@@ -1,4 +1,5 @@
 import kotlin.math.log10
+import kotlin.time.measureTimedValue
 
 fun main() {
 
@@ -40,15 +41,30 @@ fun main() {
 
     fun part2(input:List<String>):ULong = input.perform(75)
 
+    fun timePart1(input:List<String>):ULong {
+        val (ret, time) = measureTimedValue {
+            part1(input)
+        }
+        check(time.inWholeMilliseconds < 1000L)
+        return ret
+    }
+
+    fun timePart2(input:List<String>):ULong {
+        val (ret, time) = measureTimedValue {
+            part2(input)
+        }
+        check(time.inWholeMilliseconds < 1000L)
+        return ret
+    }
 
     val testInput = """
         125 17
     """.trimIndent().lines()
-    check(part1(testInput) == 55_312UL)
-    check(part2(testInput) == 65_601_038_650_482UL)
+    check(timePart1(testInput) == 55_312UL)
+    check(timePart2(testInput) == 65_601_038_650_482UL)
 
 //    // Read the input from the `src/Day11.txt` file.
     val input = readInput("Day11")
-    part1(input).println()
-    part2(input).println()
+    timePart1(input).println()
+    timePart2(input).println()
 }
