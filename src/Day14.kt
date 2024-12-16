@@ -39,7 +39,7 @@ fun main() {
 
     fun part2(input:List<String>, lobbySize:Pair<Long, Long>):Long {
         var ret = 0L
-        var data = input.parse()
+        val data = input.parse()
         while (true) {
             ret++
 
