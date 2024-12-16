@@ -39,6 +39,7 @@ fun Any?.println() = println(this)
  * Returns true if all elements in the collection match.
  */
 fun <T>Iterable<T>.unanimous(): Boolean = this.all{it == this.first()}
+fun <T>Iterable<T>.allUnique():Boolean = this.count() == this.toSet().count()
 
 fun <T>List<T>.allTuples():List<Pair<T, T>> =
     this.dropLast(1).flatMapIndexed{ idx, e ->
