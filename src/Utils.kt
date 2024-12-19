@@ -49,3 +49,24 @@ fun <T>List<T>.allTuples():List<Pair<T, T>> =
 fun Grid.get(coord:Coord) = this[coord.first][coord.second]
 fun Grid.isValid(coord:Coord) = coord.first in 0..<this.count() &&
         coord.second in 0..<this[0].count()
+
+internal data class PQState<T>(val data:T, val step:Int)
+
+// after adding data with a cost,
+// the pop will return the data with the least cost
+class PriorityQueue<T> {
+    internal val data = mutableListOf<PQState<T>>()
+    fun add(element:T, cost:Int) = add(PQState(element, cost))
+    private fun add(element:PQState<T>) {
+        val idx = data.binarySearch { element.step - it.step }
+        val insertIdx = if (idx < 0) (idx+1)*-1 else idx
+        data.add(insertIdx, element)
+    }
+    fun pop():Pair<T, Int>{
+        val ret = data.removeLast()
+        return ret.data to ret.step
+    }
+
+    fun isEmpty() = data.isEmpty()
+    fun isNotEmpty() = !isEmpty()
+}
