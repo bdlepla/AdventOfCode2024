@@ -8,7 +8,6 @@ fun main() {
             test.toLong() to theRest.split(' ').map{it.toLong()}
         }
 
-    fun Int.raisedToPower(num:Int):Int = (0..<num).fold(1){a, _ -> a * this}
 
     // operations is bit coded: 0 for add, 1 for multiply
     fun List<Long>.calculate(operations:Int):Long =

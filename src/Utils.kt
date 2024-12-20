@@ -70,3 +70,5 @@ class PriorityQueue<T> {
     fun isEmpty() = data.isEmpty()
     fun isNotEmpty() = !isEmpty()
 }
+
+fun Int.raisedToPower(num:Int):Int = (0..<num).fold(1){a, _ -> a * this}
